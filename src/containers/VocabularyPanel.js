@@ -1,11 +1,58 @@
 import React, { Component } from 'react';
 import VocabularyList from './VocabularyList';
+import firebase from 'firebase';
 
 class VocabularyPanel extends Component {
+  constructor(props) {
+    super(props);
+    this.uid = firebase.auth().currentUser.uid;
+    this.ref = firebase.database().ref(`users/${this.uid}`);
+    this.vocabulariesRef = firebase.database().ref(`users/${this.uid}/vocabularies`);
+  }
+
   state = {
     inputText: '',
     vocabularies: [],
   };
+
+  componentDidMount() {
+
+    this.vocabulariesRef.once('value').then(snapshot => {
+      const vocabularies = [];
+      snapshot.forEach(function(childSnapshot) {
+        var childKey = childSnapshot.key;
+        var childData = childSnapshot.val();
+        vocabularies.push({
+          ...childData,
+          _key: childKey,
+        });
+      });
+      this.setState({ vocabularies: vocabularies });
+
+      const lastIdInSnapshot = vocabularies[vocabularies.length - 1]._key;
+
+      this.vocabulariesRef.orderByKey().startAt(lastIdInSnapshot).on('child_added', snapshot => {
+        if (snapshot.key === lastIdInSnapshot) {
+          return;
+        }
+        this.setState({
+          vocabularies: [{
+            ...snapshot.val(),
+            _key: snapshot.key,
+          }, ...(this.state.vocabularies)]
+        })
+      });
+
+      this.vocabulariesRef.on('child_changed', snapshot => {
+        console.log(`child_changed: ${snapshot.val()}`);
+      });
+
+      this.vocabulariesRef.on('child_removed', snapshot => {
+        console.log(`child_removed: ${snapshot.val()}`);
+      });
+    })
+  }
+
 
   handleInputChange = e => {
     this.setState({ inputText: e.target.value })
@@ -19,9 +66,9 @@ class VocabularyPanel extends Component {
   }
 
   addVocabulary = (vocabulary) => {
-    this.setState({
-      vocabularies: [vocabulary, ...(this.state.vocabularies)],
-    })
+    this.vocabulariesRef.push({
+      value: vocabulary,
+    });
   }
 
   render() {
