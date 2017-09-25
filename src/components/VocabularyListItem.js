@@ -3,7 +3,12 @@ import React from 'react';
 const VocabularyListItem = ({ id, value }) => {
   return (
     <div>
-      <a href={`https://m.endic.naver.com/search.nhn?searchOption=all&query=${value}`}>{value}</a>
+      <a
+        href={`http://m.endic.naver.com/search.nhn?searchOption=all&query=${value}`}
+        target="_blank"
+      >
+        {value}
+      </a>
     </div>
   );
 };
