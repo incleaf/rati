@@ -16,20 +16,21 @@ class VocabularyPanel extends Component {
   };
 
   componentDidMount() {
-
-    this.vocabulariesRef.once('value').then(snapshot => {
+    this.vocabulariesRef.orderByChild('timestamp').once('value').then(snapshot => {
       const vocabularies = [];
       snapshot.forEach(function(childSnapshot) {
         var childKey = childSnapshot.key;
         var childData = childSnapshot.val();
-        vocabularies.push({
+        vocabularies.unshift({
           ...childData,
           _key: childKey,
         });
       });
-      this.setState({ vocabularies: vocabularies });
+      this.setState({ vocabularies });
 
-      const lastIdInSnapshot = vocabularies[vocabularies.length - 1]._key;
+      const lastIdInSnapshot = vocabularies.length
+        ? vocabularies[0]._key
+        : '';
 
       this.vocabulariesRef.orderByKey().startAt(lastIdInSnapshot).on('child_added', snapshot => {
         if (snapshot.key === lastIdInSnapshot) {
@@ -68,6 +69,7 @@ class VocabularyPanel extends Component {
   addVocabulary = (vocabulary) => {
     this.vocabulariesRef.push({
       value: vocabulary,
+      timestamp: Date.now(),
     });
   }
 
