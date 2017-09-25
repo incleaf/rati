@@ -6,9 +6,9 @@ class VocabularyList extends Component {
     return (
       <div>
         <ul>
-          {this.props.vocabularies.map((vocabulary, i) => {
+          {this.props.vocabularies.map((vocabulary) => {
             return (
-              <VocabularyListItem key={i} value={vocabulary} />
+              <VocabularyListItem key={vocabulary._key} value={vocabulary.value} />
             );
           })}
         </ul>
