@@ -47,6 +47,16 @@ class VocabularyPanel extends Component {
       });
 
       this.vocabulariesRef.on('child_changed', snapshot => {
+        const newVocabularies = this.state.vocabularies.map(vocabulary => {
+          if (vocabulary._key !== snapshot.key) {
+            return vocabulary;
+          }
+          return {
+            ...snapshot.val(),
+            _key: snapshot.key,
+          };
+        });
+        this.setState({ vocabularies: newVocabularies });
         console.log(`child_changed: ${snapshot.val()}`);
       });
 
@@ -87,6 +97,22 @@ class VocabularyPanel extends Component {
     });
   }
 
+  achieveVocabulary = (data) => {
+    this.vocabulariesRef.update({
+      [data._key]: {
+        value: data.value,
+        displayAt: Date.now() + 1000000,
+        prevDisplayAt: data.displayAt,
+        memorizationLevel: data.memorizationLevel + 1,
+        _key: data._key,
+      },
+    })
+  }
+
+  undoAchieveVocabulary = () => {
+
+  }
+
   render() {
     const { inputText, vocabularies } = this.state;
 
@@ -105,7 +131,11 @@ class VocabularyPanel extends Component {
             Add to vocab.
           </button>
         </div>
-        <VocabularyList vocabularies={vocabularies} />
+        <VocabularyList
+          vocabularies={vocabularies}
+          achieveVocabulary={this.achieveVocabulary}
+          undoAchieveVocabulary={this.undoAchieveVocabulary}
+        />
       </div>
     );
   }

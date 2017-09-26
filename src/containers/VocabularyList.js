@@ -5,7 +5,8 @@ import './VocabularyList.css';
 
 class VocabularyList extends Component {
   render() {
-    const { vocabularies } = this.props;
+    const { vocabularies, achieveVocabulary, undoAchieveVocabulary } = this.props;
+    const now = Date.now();
 
     return (
       <div>
@@ -13,7 +14,13 @@ class VocabularyList extends Component {
           {vocabularies.length
             ? vocabularies.map((vocabulary) => {
               return (
-                <VocabularyListItem key={vocabulary._key} value={vocabulary.value} />
+                <VocabularyListItem
+                  key={vocabulary._key}
+                  value={`${vocabulary.value}${vocabulary.memorizationLevel}`}
+                  handleAchieveButtonClick={() => achieveVocabulary(vocabulary)}
+                  handleUndoButtonClick={() => undoAchieveVocabulary(vocabulary)}
+                  isAchieved={vocabulary.displayAt > now}
+                />
               );
             })
             : <p className="vocablist__blankslate">Vocabulary is empty. <i>Why don't you add something?</i></p>
