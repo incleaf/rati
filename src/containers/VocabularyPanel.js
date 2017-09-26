@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import VocabularyList from './VocabularyList';
 import firebase from 'firebase';
-
+import { getNextDisplayAt } from '../utils';
 import './VocabularyPanel.css';
 
 class VocabularyPanel extends Component {
@@ -15,20 +15,28 @@ class VocabularyPanel extends Component {
   state = {
     inputText: '',
     vocabularies: [],
+    defferedCount: 0,
   };
 
   componentDidMount() {
     this.vocabulariesRef.orderByChild('timestamp').once('value').then(snapshot => {
       const vocabularies = [];
+      const now = Date.now();
+      let defferedCount = 0;
       snapshot.forEach(function(childSnapshot) {
         var childKey = childSnapshot.key;
         var childData = childSnapshot.val();
-        vocabularies.unshift({
-          ...childData,
-          _key: childKey,
-        });
+
+        if (childData.displayAt <= now) {
+          vocabularies.unshift({
+            ...childData,
+            _key: childKey,
+          });
+        } else {
+          defferedCount = defferedCount + 1;
+        }
       });
-      this.setState({ vocabularies });
+      this.setState({ vocabularies, defferedCount });
 
       const lastIdInSnapshot = vocabularies.length
         ? vocabularies[0]._key
@@ -101,12 +109,13 @@ class VocabularyPanel extends Component {
     this.vocabulariesRef.update({
       [data._key]: {
         value: data.value,
-        displayAt: Date.now() + 1000000,
+        displayAt: getNextDisplayAt(data.memorizationLevel),
         prevDisplayAt: data.displayAt,
         memorizationLevel: data.memorizationLevel + 1,
         _key: data._key,
       },
     });
+    this.setState({ defferedCount: this.state.defferedCount + 1 });
   }
 
   undoAchieveVocabulary = (data) => {
@@ -119,13 +128,19 @@ class VocabularyPanel extends Component {
         _key: data._key,
       },
     });
+    this.setState({ defferedCount: this.state.defferedCount - 1 });
   }
 
   render() {
-    const { inputText, vocabularies } = this.state;
-
+    const { inputText, vocabularies, defferedCount } = this.state;
+    const vocabLength = vocabularies.length;
     return (
       <div className="vocapanel">
+        {vocabLength > 0 &&
+          <p className="vocapanel__status">
+            <i>{defferedCount} vocabularies have been deffered out of {vocabLength}</i>
+          </p>
+        }
         <div className="vocapanel__form">
           <input
             className="vocapanel__input"
