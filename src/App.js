@@ -57,8 +57,8 @@ class App extends Component {
         <h1 className="app__title">Rati</h1>
         {displayName &&
         <p className="app__welcome">
-          Welcome, {displayName}.
-          <button className="app__btn-logout" onClick={this.handleLogoutClick}>
+          Welcome, {`${displayName}. `}
+          <button className="app__btn-loginout" onClick={this.handleLogoutClick}>
             <a href="javascript:void(0);">Logout</a>
           </button>
         </p>}

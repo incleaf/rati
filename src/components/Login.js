@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 const Login = ({ handleLoginClick }) => {
   return (
     <div>
-      <h2>로그인</h2>
-      <button onClick={handleLoginClick}>
-        구글 로그인
+      <p>A tiny service that helps you to memorize vocabulary easily</p><br />
+      <button className="app__btn-loginout" onClick={handleLoginClick}>
+        <a href="javascript:void(0);">Login (via Google)</a>
       </button>
     </div>
   );

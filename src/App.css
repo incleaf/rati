@@ -7,7 +7,9 @@
   font-size: 1.2em;
 }
 
-.app__btn-logout {
+.app__btn-loginout {
+  padding: 0;
+  margin: 0;
   background-color: transparent;
   border: 0;
   font-size: 1em;
