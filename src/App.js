@@ -54,14 +54,16 @@ class App extends Component {
 
     return (
       <div className="app">
-        <h1 className="app__title">Rati</h1>
-        {displayName &&
-        <p className="app__welcome">
-          Welcome, {`${displayName}. `}
-          <button className="app__btn-loginout" onClick={this.handleLogoutClick}>
-            <a href="javascript:void(0);">Logout</a>
-          </button>
-        </p>}
+        <div className="app__header">
+          <h1 className="app__title">Rati</h1>
+          {displayName &&
+          <p className="app__welcome">
+            Welcome, {`${displayName}. `}
+            <button className="app__btn-loginout" onClick={this.handleLogoutClick}>
+              <a href="javascript:void(0);">Logout</a>
+            </button>
+          </p>}
+        </div>
         {this.state.isLoggedIn
           ? <VocabularyPanel />
           : <Login handleLoginClick={this.handleLoginClick} />
