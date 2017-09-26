@@ -63,15 +63,27 @@ class VocabularyPanel extends Component {
 
   handleInputKeyPress = e => {
     if (e.key === 'Enter') {
-      this.addVocabulary(this.state.inputText);
-      this.setState({ inputText: '' });
+      this.addInputTextToVocabulary();
     }
+  }
+
+  handleAddButtonClick = () => {
+    this.addInputTextToVocabulary();
+  }
+
+  addInputTextToVocabulary = () => {
+    if (this.state.inputText.length < 2) {
+      return;
+    }
+    this.addVocabulary(this.state.inputText);
+    this.setState({ inputText: '' });
   }
 
   addVocabulary = (vocabulary) => {
     this.vocabulariesRef.push({
       value: vocabulary,
-      timestamp: Date.now(),
+      displayAt: Date.now(),
+      memorizationLevel: 1,
     });
   }
 
@@ -89,7 +101,7 @@ class VocabularyPanel extends Component {
             onChange={this.handleInputChange}
             onKeyPress={this.handleInputKeyPress}
           />
-          <button className="vocapanel__btn-add">
+          <button className="vocapanel__btn-add" onClick={this.handleAddButtonClick}>
             Add to vocab.
           </button>
         </div>
