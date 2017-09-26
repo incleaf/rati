@@ -106,11 +106,19 @@ class VocabularyPanel extends Component {
         memorizationLevel: data.memorizationLevel + 1,
         _key: data._key,
       },
-    })
+    });
   }
 
-  undoAchieveVocabulary = () => {
-
+  undoAchieveVocabulary = (data) => {
+    this.vocabulariesRef.update({
+      [data._key]: {
+        value: data.value,
+        displayAt: data.prevDisplayAt,
+        prevDisplayAt: null,
+        memorizationLevel: data.memorizationLevel - 1,
+        _key: data._key,
+      },
+    });
   }
 
   render() {

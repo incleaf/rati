@@ -16,10 +16,15 @@ class VocabularyList extends Component {
               return (
                 <VocabularyListItem
                   key={vocabulary._key}
-                  value={`${vocabulary.value}${vocabulary.memorizationLevel}`}
-                  handleAchieveButtonClick={() => achieveVocabulary(vocabulary)}
-                  handleUndoButtonClick={() => undoAchieveVocabulary(vocabulary)}
+                  value={`${vocabulary.value}`}
                   isAchieved={vocabulary.displayAt > now}
+                  handleButtonClick={() => {
+                    if (vocabulary.displayAt > now) {
+                      undoAchieveVocabulary(vocabulary)
+                    } else {
+                      achieveVocabulary(vocabulary)
+                    }
+                  }}
                 />
               );
             })

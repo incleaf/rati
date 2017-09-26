@@ -2,7 +2,7 @@ import React from 'react';
 
 import './VocabularyListItem.css';
 
-const VocabularyListItem = ({ id, value, isAchieved, handleAchieveButtonClick, handleUndoAchieveButtonClick }) => {
+const VocabularyListItem = ({ id, value, isAchieved, handleButtonClick }) => {
   return (
     <li className={`vocablistitem ${isAchieved && 'vocablistitem--achieved'}`}>
       <div className="vocablistitem__value">
@@ -13,7 +13,7 @@ const VocabularyListItem = ({ id, value, isAchieved, handleAchieveButtonClick, h
           {value}
         </a>
       </div>
-      <button className="vocablistitem__btn-achieve" onClick={isAchieved ? handleUndoAchieveButtonClick : handleAchieveButtonClick}>
+      <button className="vocablistitem__btn-achieve" onClick={handleButtonClick}>
         {isAchieved ? 'Undo' : 'Achieve'}
       </button>
     </li>
