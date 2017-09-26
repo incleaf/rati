@@ -16,7 +16,7 @@ class VocabularyList extends Component {
                 <VocabularyListItem key={vocabulary._key} value={vocabulary.value} />
               );
             })
-            : <p>Vocabulary is empty. Why don't you add something?</p>
+            : <p className="vocablist__blankslate">Vocabulary is empty. <i>Why don't you add something?</i></p>
           }
         </ul>
       </div>
