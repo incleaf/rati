@@ -28,7 +28,7 @@ class VocabularyList extends Component {
                 />
               );
             })
-            : <p className="vocablist__blankslate">Vocabulary is empty. <i>Why don't you add something?</i></p>
+            : <p className="vocablist__blankslate">List is empty. <i>Why don't you add something?</i></p>
           }
         </ul>
       </div>
