@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Rati",
+  "name": "A tiny service that helps you to memorize vocabulary easily",
   "icons": [
     {
       "src": "favicon.ico",
