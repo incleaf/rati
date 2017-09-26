@@ -1,8 +1,10 @@
 .vocablistitem {
+  display: flex;
   margin: 0;
-  padding: 0 10px;
+  padding: 0;
+  padding-left: 10px;
   font-size: 1.4em;
-  height: 40px;
+  height: 48px;
   vertical-align: middle;
 }
 
@@ -19,5 +21,30 @@
 
 .vocablistitem:nth-child(2n+1) {
   background-color: #fbfbfb;
+}
+
+.vocablistitem + .vocablistitem {
+  border-top: 1px solid #ECECEC;
+}
+
+.vocablistitem__value {
+  flex: 1;
+}
+
+.vocablistitem__btn-achieve {
+  vertical-align: middle;
+  border: 0;
+  /* border-left: 1px solid #E2E2E2; */
+  background-color: rgba(0, 0, 0, 0.02);
+  color: #747474;
+  font-size: 0.6em;
+  padding: 0 10px;
+}
+
+.vocablistitem__btn-achieve:active,
+.vocablistitem__btn-achieve:hover,
+.vocablistitem__btn-achieve:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 

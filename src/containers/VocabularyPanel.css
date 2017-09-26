@@ -7,10 +7,20 @@
   height: 34px;
   padding: 0 5px;
   flex: 1;
+  border-radius: 0;
+  border: 1px solid #dedede;
   /* width: 300px; */
 }
 
 .vocapanel__btn-add {
   flex: none;
+  border-radius: 0;
+  border: 1px solid #dedede;
+  background-color: #dedede;
   height: 34px;
+}
+
+.vocapanel__btn-add:active,
+.vocapanel__btn-add:hover {
+  background-color: rgb(189, 189, 189);
 }
