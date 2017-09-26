@@ -3,6 +3,10 @@
   margin: 0 auto;
 }
 
+.app__title {
+  color: #0c2340;
+}
+
 .app__welcome {
   font-size: 1.2em;
 }

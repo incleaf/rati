@@ -4,23 +4,33 @@
 }
 
 .vocapanel__input {
-  height: 34px;
-  padding: 0 5px;
   flex: 1;
+  height: 48px;
+  padding: 0 10px;
+  margin: 0;
   border-radius: 0;
   border: 1px solid #dedede;
+  border-right: 0;
   /* width: 300px; */
 }
 
 .vocapanel__btn-add {
   flex: none;
+  height: 48px;
+  width: 140px;
+  margin: 0;
   border-radius: 0;
   border: 1px solid #dedede;
-  background-color: #dedede;
-  height: 34px;
+  background-color: #0c2340;
+  color: #fff;
 }
 
 .vocapanel__btn-add:active,
 .vocapanel__btn-add:hover {
-  background-color: rgb(189, 189, 189);
+  background-color: rgba(12, 35, 64, 0.8);
+}
+
+.vocapanel__status {
+  font-size: 0.9em;
+  color: #989898;
 }

@@ -23,8 +23,13 @@
   background-color: #fbfbfb;
 }
 
+.vocablistitem:first-child,
 .vocablistitem + .vocablistitem {
   border-top: 1px solid #ECECEC;
+}
+
+.vocablistitem:last-child {
+  border-bottom: 1px solid #ECECEC;
 }
 
 .vocablistitem--achieved a {
