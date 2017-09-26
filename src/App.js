@@ -12,12 +12,14 @@ class App extends Component {
   state = {
     isLoggedIn: false,
     isInitialized: false,
+    displayName: '',
   };
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({
         isLoggedIn: !!user,
+        displayName: user.displayName,
         isInitialized: true,
       });
     });
@@ -32,15 +34,18 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, isInitialized } = this.state;
+    const { isLoggedIn, isInitialized, displayName } = this.state;
 
     if (!isInitialized) {
       return <p>Loading...</p>;
     }
 
     return (
-      <div className="App">
-        <h1>Rati</h1>
+      <div className="app">
+        <h1 className="app__title">Rati</h1>
+        <p className="app__welcome">
+          Welcome, {displayName}.<br />
+        </p>
         {this.state.isLoggedIn
           ? <VocabularyPanel />
           : <Login handleLoginClick={this.handleLoginClick} />

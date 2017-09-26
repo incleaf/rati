@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import VocabularyList from './VocabularyList';
 import firebase from 'firebase';
 
+import './VocabularyPanel.css';
+
 class VocabularyPanel extends Component {
   constructor(props) {
     super(props);
@@ -77,14 +79,20 @@ class VocabularyPanel extends Component {
     const { inputText, vocabularies } = this.state;
 
     return (
-      <div>
-        <input
-          type="text"
-          value={inputText}
-          placeholder="Type word or phrase"
-          onChange={this.handleInputChange}
-          onKeyPress={this.handleInputKeyPress}
-        />
+      <div className="vocapanel">
+        <div className="vocapanel__form">
+          <input
+            className="vocapanel__input"
+            type="text"
+            value={inputText}
+            placeholder="Type word or phrase"
+            onChange={this.handleInputChange}
+            onKeyPress={this.handleInputKeyPress}
+          />
+          <button className="vocapanel__btn-add">
+            Add to vocab.
+          </button>
+        </div>
         <VocabularyList vocabularies={vocabularies} />
       </div>
     );

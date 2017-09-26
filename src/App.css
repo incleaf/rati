@@ -1,3 +1,12 @@
+.app {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.app__welcome {
+  font-size: 1.2em;
+}
+
 .App {
   text-align: center;
 }

@@ -1,0 +1,16 @@
+.vocapanel__form {
+  display: flex;
+  flex-flow: row;
+}
+
+.vocapanel__input {
+  height: 34px;
+  padding: 0 5px;
+  flex: 1;
+  /* width: 300px; */
+}
+
+.vocapanel__btn-add {
+  flex: none;
+  height: 34px;
+}
