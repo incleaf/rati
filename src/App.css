@@ -7,6 +7,12 @@
   font-size: 1.2em;
 }
 
+.app__btn-logout {
+  background-color: transparent;
+  border: 0;
+  font-size: 1em;
+}
+
 .App {
   text-align: center;
 }

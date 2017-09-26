@@ -33,6 +33,18 @@ class App extends Component {
     });
   }
 
+  handleLogoutClick = () => {
+    firebase.auth().signOut().then(() => {
+      this.setState({
+        isLoggedIn: false,
+        displayName: '',
+      })
+    }).catch(e => {
+      console.warn(e);
+      alert('An error occurred. Please try again.');
+    });
+  }
+
   render() {
     const { isLoggedIn, isInitialized, displayName } = this.state;
 
@@ -45,7 +57,10 @@ class App extends Component {
         <h1 className="app__title">Rati</h1>
         {displayName &&
         <p className="app__welcome">
-          Welcome, {displayName}.<br />
+          Welcome, {displayName}.
+          <button className="app__btn-logout" onClick={this.handleLogoutClick}>
+            <a href="javascript:void(0);">Logout</a>
+          </button>
         </p>}
         {this.state.isLoggedIn
           ? <VocabularyPanel />
