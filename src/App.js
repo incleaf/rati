@@ -19,7 +19,7 @@ class App extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({
         isLoggedIn: !!user,
-        displayName: user.displayName,
+        displayName: user ? user.displayName : '',
         isInitialized: true,
       });
     });
@@ -43,9 +43,10 @@ class App extends Component {
     return (
       <div className="app">
         <h1 className="app__title">Rati</h1>
+        {displayName &&
         <p className="app__welcome">
           Welcome, {displayName}.<br />
-        </p>
+        </p>}
         {this.state.isLoggedIn
           ? <VocabularyPanel />
           : <Login handleLoginClick={this.handleLoginClick} />
