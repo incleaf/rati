@@ -37,7 +37,7 @@ class App extends Component {
     const { isLoggedIn, isInitialized, displayName } = this.state;
 
     if (!isInitialized) {
-      return <p>Loading...</p>;
+      return <p style={{ textAlign: 'center' }}>Loading...</p>;
     }
 
     return (
