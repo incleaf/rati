@@ -3,7 +3,8 @@ import { Delete, Edit } from './Icons';
 
 import './VocabularyListItem.css';
 
-const VocabularyListItem = ({ id, value, isAchieved, handleButtonClick }) => {
+const VocabularyListItem = props => {
+  const { id, value, isAchieved, handleAchieveClick } = props;
   return (
     <li className={`vocablistitem ${isAchieved && 'vocablistitem--achieved'}`}>
       <div className="vocablistitem__value">

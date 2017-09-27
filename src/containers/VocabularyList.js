@@ -18,7 +18,7 @@ class VocabularyList extends Component {
                   key={vocabulary._key}
                   value={`${vocabulary.value}`}
                   isAchieved={vocabulary.displayAt > now}
-                  handleButtonClick={() => {
+                  handleAchieveClick={() => {
                     if (vocabulary.displayAt > now) {
                       undoAchieveVocabulary(vocabulary)
                     } else {
