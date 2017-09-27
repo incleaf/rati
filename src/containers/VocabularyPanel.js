@@ -138,8 +138,12 @@ class VocabularyPanel extends Component {
     firebase.database().ref(`users/${this.uid}/vocabularies/${data._key}`).remove();
   }
 
-  editVocabulary = data => {
-
+  editVocabulary = (data, newValue) => {
+    this.vocabulariesRef.update({
+      [data._key]: {
+        value: newValue,
+      },
+    });
   }
 
   render() {
@@ -170,6 +174,7 @@ class VocabularyPanel extends Component {
           achieveVocabulary={this.achieveVocabulary}
           undoAchieveVocabulary={this.undoAchieveVocabulary}
           deleteVocabulary={this.deleteVocabulary}
+          editVocabulary={this.editVocabulary}
         />
       </div>
     );

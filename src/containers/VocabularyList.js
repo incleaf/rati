@@ -18,8 +18,8 @@ class VocabularyList extends Component {
                   key={vocabulary._key}
                   value={`${vocabulary.value}`}
                   isAchieved={vocabulary.displayAt > now}
-                  handleEditClick={value => {
-                    editVocabulary(vocabulary);
+                  editVocabulary={newValue => {
+                    editVocabulary(vocabulary, newValue);
                   }}
                   handleDeleteClick={() => {
                     deleteVocabulary(vocabulary);

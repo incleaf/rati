@@ -97,3 +97,7 @@
 .vocablistitem__extra-item:hover svg {
   fill: #5F5F5F;
 }
+
+.vocablistitem__control {
+  padding: 3px 6px;
+}
