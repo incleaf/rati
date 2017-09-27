@@ -1,5 +1,6 @@
 .vocablistitem {
   display: flex;
+  position: relative;
   margin: 0;
   padding: 0;
   padding-left: 10px;
@@ -39,6 +40,10 @@
 
 .vocablistitem__value {
   flex: 1;
+  padding-right: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .vocablistitem__btn-achieve {
@@ -59,3 +64,36 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.vocablistitem__extras {
+  display: none;
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  margin-right: 10px;
+  transform: translateY(-50%);
+}
+.vocablistitem:hover .vocablistitem__extras {
+  display: block;
+}
+
+.vocablistitem__extra-item {
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.vocablistitem__extra-item + .vocablistitem__extra-item {
+  margin-left: 2px;
+}
+
+.vocablistitem__extra-item svg {
+  fill: #9B9B9B;
+  width: 20px;
+}
+
+.vocablistitem__extra-item:hover svg {
+  fill: #5F5F5F;
+}
