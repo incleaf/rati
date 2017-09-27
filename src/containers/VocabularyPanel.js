@@ -69,7 +69,10 @@ class VocabularyPanel extends Component {
       });
 
       this.vocabulariesRef.on('child_removed', snapshot => {
-        console.log(`child_removed: ${snapshot.val()}`);
+        const newVocabularies = this.state.vocabularies.filter(vocabulary => {
+          return vocabulary._key !== snapshot.key
+        });
+        this.setState({ vocabularies: newVocabularies });
       });
     })
   }
@@ -131,6 +134,14 @@ class VocabularyPanel extends Component {
     this.setState({ defferedCount: this.state.defferedCount - 1 });
   }
 
+  deleteVocabulary = data => {
+    firebase.database().ref(`users/${this.uid}/vocabularies/${data._key}`).remove();
+  }
+
+  editVocabulary = data => {
+
+  }
+
   render() {
     const { inputText, vocabularies, defferedCount } = this.state;
     const vocabLength = vocabularies.length;
@@ -158,6 +169,7 @@ class VocabularyPanel extends Component {
           vocabularies={vocabularies}
           achieveVocabulary={this.achieveVocabulary}
           undoAchieveVocabulary={this.undoAchieveVocabulary}
+          deleteVocabulary={this.deleteVocabulary}
         />
       </div>
     );

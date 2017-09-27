@@ -5,7 +5,7 @@ import './VocabularyList.css';
 
 class VocabularyList extends Component {
   render() {
-    const { vocabularies, achieveVocabulary, undoAchieveVocabulary } = this.props;
+    const { vocabularies, achieveVocabulary, undoAchieveVocabulary, editVocabulary, deleteVocabulary } = this.props;
     const now = Date.now();
 
     return (
@@ -18,6 +18,12 @@ class VocabularyList extends Component {
                   key={vocabulary._key}
                   value={`${vocabulary.value}`}
                   isAchieved={vocabulary.displayAt > now}
+                  handleEditClick={value => {
+                    editVocabulary(vocabulary);
+                  }}
+                  handleDeleteClick={() => {
+                    deleteVocabulary(vocabulary);
+                  }}
                   handleAchieveClick={() => {
                     if (vocabulary.displayAt > now) {
                       undoAchieveVocabulary(vocabulary)

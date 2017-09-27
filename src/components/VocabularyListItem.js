@@ -4,7 +4,7 @@ import { Delete, Edit } from './Icons';
 import './VocabularyListItem.css';
 
 const VocabularyListItem = props => {
-  const { id, value, isAchieved, handleAchieveClick } = props;
+  const { id, value, isAchieved, handleAchieveClick, handleEditClick, handleDeleteClick } = props;
   return (
     <li className={`vocablistitem ${isAchieved && 'vocablistitem--achieved'}`}>
       <div className="vocablistitem__value">
@@ -16,14 +16,14 @@ const VocabularyListItem = props => {
         </a>
       </div>
       <div className="vocablistitem__extras">
-        <button className="vocablistitem__extra-item">
+        <button className="vocablistitem__extra-item" onClick={handleEditClick}>
           <Edit />
         </button>
-        <button className="vocablistitem__extra-item">
+        <button className="vocablistitem__extra-item" onClick={handleDeleteClick}>
           <Delete />
         </button>
       </div>
-      <button className="vocablistitem__btn-achieve" onClick={handleButtonClick}>
+      <button className="vocablistitem__btn-achieve" onClick={handleAchieveClick}>
         {isAchieved ? 'Undo' : 'Achieve'}
       </button>
     </li>
